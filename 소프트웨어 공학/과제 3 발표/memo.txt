@@ -1,0 +1,12 @@
+User -> Card, Item : Mouse Right-Click
+Card, Item --> User : Show ContextMenu
+alt Show Memo
+User -> Memo : Click Show Memo
+Memo -> Memo : MakeMemoForm()
+Memo --> User : MemoForm
+User -> Memo : Insert Any Text
+Memo -> Memo : memo = Any Text
+else Delete Memo
+User -> Memo : Click Delete Memo
+Memo -> Memo : meme =""
+end

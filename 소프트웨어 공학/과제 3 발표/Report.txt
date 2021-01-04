@@ -1,0 +1,27 @@
+alt MakeReport
+ User -> Card : select Card
+ Card --> User : show Items
+ User -> Item : select Item
+ User -> MainUIForm : select MakeReport Button
+ MainUIForm -> Portfolio Manager : MakeReport()
+ Portfolio Manager -> Report : new Report()
+ Report --> Portfolio Manager : Report
+ 
+ Portfolio Manager -> Report : InitReport()
+ Report -> Portfolio Manager : GetManager.Cards
+ Portfolio Manager --> Report : CardList
+ Report  -> Report  : Get Checked CardList
+ loop foreach card in checkedCardList
+    Report -> Report : Set locationY
+    Report -> Report : MakeContentsPanel(card, locationY)
+    Report -> Card : GetItems
+    Card --> Report : ItemList
+    Report -> Report : Get Checked ItemList
+    loop foreach itme in checkedItemList
+        Report -> Report : Add Item to ContentsPanel
+    end
+ end
+
+ MainUIForm -> Report : ShowDialog()
+ Report --> User : Report
+end

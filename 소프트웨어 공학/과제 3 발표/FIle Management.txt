@@ -1,0 +1,29 @@
+alt File Load
+    User -> MainUIForm : select Load
+    MainUIForm -> Portfolio Manager : FileLoad()
+    Portfolio Manager -> File Manager  : Load()
+    File Manager -> DataSet : Initiialize()
+    File Manager -> DataSet : set Load Data
+    File Manager -> Portfolio Manager : GetManager
+    Portfolio Manager -> MainUIForm  : UILoad()
+    MainUIForm -> DataSet : DataSet.Instant.CardList
+    DataSet --> MainUIForm  : CardData List
+    MainUIForm -> ElementPanel : InitCardList()
+    loop foreach cardData in CardList
+        MainUIForm -> Card : new Card(cardData)
+        Card --> MainUIForm : Card
+        MainUIForm -> ElementPanel : AddElement(Card)
+        
+        MainUIForm -> CardData : cardData.ItemList
+        CardData --> MainUIForm : ItemDataList
+        loop foreach itemData in ItemDataList
+            MainUIForm  -> Item : item(itemData)
+            Item --> MainUIForm : Item
+            MainUIForm -> Card : GetItems.Add(Item)
+        end
+    end
+else File Save
+    User -> MainUIForm : select Save
+    MainUIForm -> File Manager : FileSave()
+    File Manager -> File Manager : Save()
+end

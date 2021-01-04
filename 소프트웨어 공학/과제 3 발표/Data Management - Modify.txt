@@ -1,0 +1,39 @@
+alt Modify Card
+    User -> Card : Select Card
+    Card --> User : Show Items
+    User -> MainUIForm : select ModifyCard Button
+    MainUIForm -> MainUIForm : FindOnlyCheckedCard()
+    alt Select Only Card
+     MainUIForm -> Portfolio Manager : ModifyCard(Element Panel)
+     Portfolio Manager -> Card : ModifyCard(num)
+     Card -> Card : PoupForm("카드수정", "");
+     Card --> User : ModifyCardForm
+     User -> Card : Insert New Card Name
+     Card -> DataSet : Instance.findCardData(name, index)
+     DataSet --> Card : CardData
+     Card -> CardData : CardData.cardName = New Card Name
+     Card -> Card :cardName = New Card Name
+     Portfolio Manager -> Element Panel : UIRelocate(elementList)
+    else Select Many Card
+     MainUIForm -> User : Show "Choice One" MessageBox
+    end
+else Modify Item
+    User -> Card : select Card
+    Card --> User : Show Items
+    User -> Item : Select Item
+    User -> Card : select ModifyItem button
+    Card -> Card : FindOnlyCheckItem()
+    alt Select Only Item
+     Card -> Card : ChangeItem(item)
+     Card -> Item : ModifyItem()
+     Item -> Item : PopUpForm("아이템 수정창", contents, parents.Width)
+     Item --> User : ModifyItemForm
+     User -> Item : Select new type & Insert new contents
+     Item -> CardData : FindItem(CardDataIndex, contents)
+     CardData --> Item : ItemData
+     Item -> ItemData : set new type&new contents
+     Item -> Item : set new type & new contents
+    else Select Many Item
+     Card -> User : Show "Choice One" MessageBox
+    end
+end

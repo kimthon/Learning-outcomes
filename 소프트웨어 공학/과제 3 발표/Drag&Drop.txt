@@ -1,0 +1,13 @@
+alt Drage & Drop
+    User -> Card : Click
+    Card -> Card : Drag&Drop
+    Card -> ElementPanel : UIDragLocation(card)
+    ElementPanel -> ElementPanel : Swap Card Location
+    ElementPanel -> ElementPanel : LocationInit()
+    loop 0 to elementList.Count
+        loop 0 t0 elementList.Count
+            ElementPanel -> ElementPanel : Find InitIndex
+        end
+        ElementPanel -> Card : Set Location by InitIndex
+    end
+end

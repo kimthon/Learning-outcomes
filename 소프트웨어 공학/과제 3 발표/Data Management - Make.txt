@@ -1,0 +1,33 @@
+alt Make Card
+    User -> MainUIForm : select MakeCard Button
+    MainUIForm -> Portfolio Manager : MakeCard(Element Panel)
+    Portfolio Manager -> Card : MakeCard(index)
+    Card -> Card : PopForm("카드생성", "");
+    Card --> User : MakeCardForm
+    User -> Card : Insert Card Name
+    Card -> CardData : new CardData()
+    CardData --> Card : CardData()
+    Card -> DataSet : Instance.SetCard(cardData)
+    Card -> Card : Card(Card Name, num)
+    Card --> Portfolio Manager : Card
+    Portfolio Manager -> Element Panel : addElementCard(card)
+    Portfolio Manager -> Element Panel : UIRelocate(elementList)
+else Make Item
+    User -> Card : select Card
+    Card --> User : Show Items
+    User -> Card : select MakeItem button
+    Card -> Card : MakeItem()
+    Card -> Item : MakeItem(this)
+    Item -> Item : PopUpForm("아이템 생성창", "", parents.Width)
+    Item --> User : MakeItemForm
+    User -> Item : Select type & Insert contents
+    
+    Item -> Item : Item(contnts, type, width)
+    Item -> ItemData : new ItemData(CardData.Index)
+    ItemData --> Item : ItemData
+    Item -> DataSet : Instance.FindCardData(parents.CardName, Parent.Index)
+    DataSet --> Item : CardData
+    Item -> CardData : AddItem(itemData)
+    Item --> Card : Item
+    Card -> Card : Add Item to Conrol & List
+end

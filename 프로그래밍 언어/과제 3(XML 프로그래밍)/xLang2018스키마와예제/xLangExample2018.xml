@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xLang18 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xLang2018.xsd">
+	<Author>Su-Hyun Lee</Author>
+	<Function>
+		<Fname>main</Fname>
+		<Statement>
+			<Assign>
+				<Vname>a</Vname>
+				<Num>1</Num>
+			</Assign>
+			<Assign>
+				<Vname>sum</Vname>
+				<Num>0</Num>
+			</Assign>
+			<Input>
+				<Vname>n</Vname>
+			</Input>
+			<While>
+				<LE>
+					<Vname>a</Vname>
+					<Vname>n</Vname>
+				</LE>
+				<Do>
+					<Assign>
+						<Vname>sum</Vname>
+						<Add>
+							<Vname>sum</Vname>
+							<Vname>a</Vname>
+						</Add>
+					</Assign>
+					<Assign>
+						<Vname>a</Vname>
+						<Add>
+							<Vname>a</Vname>
+							<Num>1</Num>
+						</Add>
+					</Assign>
+				</Do>
+			</While>
+			<Output>
+				<Vname>sum</Vname>
+			</Output>
+			<Return>
+				<Num>0</Num>
+			</Return>
+		</Statement>
+	</Function>
+</xLang18>

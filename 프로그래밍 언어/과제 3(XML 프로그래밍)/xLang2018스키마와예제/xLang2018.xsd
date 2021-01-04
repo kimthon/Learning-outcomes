@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by Lee (CNU) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="xLang18">
+		<xs:annotation>
+			<xs:documentation>XML-based Language</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Author" type="xs:string"/>
+				<xs:element name="Function" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Fname" type="xs:string"/>
+							<xs:element name="Param" minOccurs="0" maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Vname" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Statement" type="stmtType"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="stmtType">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Assign">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Vname" type="xs:string"/>
+						<xs:group ref="exprGroup"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="If">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="condGroup"/>
+						<xs:element name="Then" type="stmtType"/>
+						<xs:element name="Else" type="stmtType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="While">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="condGroup"/>
+						<xs:element name="Do" type="stmtType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Input">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Vname" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Output">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="exprGroup"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Return">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:group ref="exprGroup"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:group name="exprGroup">
+		<xs:choice>
+			<xs:element name="Add">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Sub">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Mul">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Div">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Mod">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Vname" type="xs:string"/>
+			<xs:element name="Num" type="xs:string"/>
+			<xs:element name="Fun">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Fname" type="xs:string"/>
+						<xs:element name="Param" minOccurs="0">
+							<xs:complexType>
+								<xs:group ref="exprGroup" maxOccurs="unbounded"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="condGroup">
+		<xs:choice>
+			<xs:element name="EQ">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NE">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GE">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GT">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="LE">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="LT">
+				<xs:complexType>
+					<xs:group ref="exprGroup" minOccurs="2" maxOccurs="2"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:group>
+</xs:schema>

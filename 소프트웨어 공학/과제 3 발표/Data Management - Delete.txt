@@ -1,0 +1,33 @@
+alt Delete Card
+    User -> Card : select Card
+    Card --> User : Show Items
+    User -> MainUIForm : select Delete Button
+    MainUIForm -> MainUIForm : FindOnlyCheckedCard()
+    alt Select Only Card
+     MainUIForm  -> Portfolio Manager : DeleteCard(ElementPanel, Item)
+     Portfolio Manager  -> DataSet : Instance.findCardData(name, index)
+     DataSet --> Portfolio Manager : CardData
+     Portfolio Manager -> DataSet : Instance.CardList.Remove(CardData)
+     Portfolio Manager -> CardData : Dispose()
+     Portfolio Manager -> Card : Dispose()
+     Portfolio Manager -> Element Panel : UIRelocate(elementList)
+    else Select Many Card 
+     Element Panel -> User : Show "Choice One" MessageBox
+    end
+else Delete Item
+    User -> Card : select Card
+    Card -> User : Show Data
+    User -> Item : select Item
+    User -> Card : select MakeItem button
+    Card -> Card : FindOnlyCheckedItem()
+    alt Select Only Item
+     Card -> CardData : FindItem(CardDataIndex, contents)
+     CardData --> Card : ItemData
+     Card -> DataSet : FindCardData(name, index)
+     Card -> CardData: ItemList.Remove(ItemData)
+     Card -> CardData : Dispose()
+     Card -> Item : Dispose()
+    else Select Many Item
+     Card -> User : Show "Choice One" MessageBox
+    end
+end
